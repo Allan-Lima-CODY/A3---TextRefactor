@@ -1,6 +1,9 @@
 class Text {
     constructor(text) {
       this.text = null;
+      this.title = null;
+      this.predefinedKeywords  = null;
+      this.phrases = null;
       this.textTokenized = null;
       this.extractedSortOftenWords = null;
       this.textTheme = null;
