@@ -2,4 +2,10 @@ Primeira etapa:
 - Aprimorar o código fazendo com que o texto seja separado primeiramente em frases e depois em palavras;
 - Pensar que não será passado um texto por rota e sim que irá ter um arquivo zip com vários arquivos de texto e os mesmo serão correlacionados entre si, para que um grafo possa ser gerado com relação a algumas coisas contidas nesses textos;
 - Descobrir uma maneira de criar uma lista com os diferentes arquivos lidos dentro do zip;
-- Com a lista de arquivos lida dentro do zip, preciso que cada texto dentro de cada arquivo seja lido e feita uma análise para os mesmos e separar essa análise dentro de uma lista de objetos, onde cada objeto, representa um texto diferente.
+- Com a lista de arquivos lida dentro do zip, preciso que cada texto dentro de cada arquivo seja lido e feita uma análise para os mesmos e separar essa análise dentro de uma lista de objetos, onde cada objeto, representa um texto diferente;
+- Cada texto terá o seu objeto e como ponto mais importante, esse objeto terá uma lista de frases, onde essas frases serão tokenizadas e das palavras tokenizadas, serão retiradas as stopwords e será feita a lematização.
+
+Grafos:
+- Utilizar lista de adjacênscia;
+- Não repetir palavras dentro do Grafo e sim colocar a repetição de palavras;
+- Popular o grafo utilizando como base as frases.

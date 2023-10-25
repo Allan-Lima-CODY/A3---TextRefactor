@@ -1,5 +1,5 @@
 class Text {
-    constructor(text) {
+    constructor() {
       this.text = null;
       this.title = null;
       this.predefinedKeywords  = null;

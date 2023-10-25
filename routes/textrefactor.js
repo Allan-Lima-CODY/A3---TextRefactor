@@ -11,12 +11,6 @@ const exportedRefactorText = {
     textRefactor
 };
 
-textRefactor.get("/receivetext", (req, res, error) => {
-    const { Text } = req.body;
-
-    objText.text = bllTextRefactor.getText([Text]);
-});
-
 textRefactor.post("/tokenizetext", async (req, res, error) => {
     if (objText.text != null) {
         objText.textTokenized = bllTextRefactor.tokenizeText(objText.text);
