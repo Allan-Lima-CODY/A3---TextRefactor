@@ -1,26 +1,41 @@
-import express, { text } from "express";
-import BLLTextRefactor from "../BLL/BLLTextRefactor";
+import express from "express";
+import BLLTextRefactor from "../BLL/BLLTextRefactor.js";
+import Text from '../BO/BEText.js';
+import exportedArchives from "./receivearchive.js";
+
 const bllTextRefactor = new BLLTextRefactor();
-import Text from '../BO/BEText';
-const objText = new Text();
 
 const textRefactor = express.Router();
 
 const exportedRefactorText = {
-    objText,
+    objText: {
+        textRefactored: []
+    },
     textRefactor
 };
 
-textRefactor.post("/tokenizetext", async (req, res, error) => {
-    if (objText.text != null) {
-        objText.textTokenized = bllTextRefactor.tokenizeText(objText.text);
-        objText.tokenizedWithoutStopWords = bllTextRefactor.removeStopWords(objText.textTokenized);
-        objText.stemmed = bllTextRefactor.lemmatizeTokens(objText.tokenizedWithoutStopWords);
-        objText.extractKeywords = bllTextRefactor.extractKeywords(objText.stemmed);
-        objText.extractedSortOftenWords = bllTextRefactor.oftenWords(objText.extractKeywords);
-        objText.textTheme = bllTextRefactor.identifyTheme(objText.extractedSortOftenWords);
+textRefactor.get("/refactortext", async (req, res, error) => {
+    if (Object.keys(exportedArchives.objArchive.texts).length !== 0) {
+        for(let i = 0; i < exportedArchives.objArchive.texts.length;i++){
+            const objText = new Text();
+
+            objText.text = bllTextRefactor.getText(exportedArchives.objArchive.texts[i]);
+            objText.title = bllTextRefactor.getTitle(objText.text);
+            objText.predefinedKeywords = bllTextRefactor.getPredefinedKeywords(objText.text);
+            objText.phrases = bllTextRefactor.getPhrases(objText.text);
+            objText.tokenizedPhrases = bllTextRefactor.tokenizePhrases(objText.phrases);
+            objText.removedStopwords = bllTextRefactor.removeStopWords(objText.tokenizedPhrases);
+            objText.lemmatized = bllTextRefactor.lemmatizeTokens(objText.removedStopwords);
+            objText.extractedSortOftenWords = bllTextRefactor.extractKeywordsOften(objText.lemmatized);
+            objText.wordFrequency = bllTextRefactor.sortWords(objText.extractedSortOftenWords);
+
+            exportedRefactorText.objText.textRefactored.push(objText);
+        }
+
+        res.json(exportedRefactorText.objText.textRefactored);
+        res.status(200);
     } else {
-        res.json({ msg: "You need a text to tokenize something!" });
+        res.json({ msg: "You need a texts to tokenize!" });
     }
 });
 

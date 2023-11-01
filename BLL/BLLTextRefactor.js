@@ -1,5 +1,7 @@
-const stopwords = require('stopwords');
-const nlp = require('compromise');
+import stopword from 'stopword';
+const language = 'pt';
+import nlp from 'compromise';
+import stopwords from '../Constants/stopwords.js'
 
 class BLLTextRefactor {
   getText(text) {
@@ -24,17 +26,17 @@ class BLLTextRefactor {
     return phrases;
   }
 
-  tokenizeText(phrases) {
+  tokenizePhrases(phrases) {
     const phrasesTokenized = [];
 
     for (let i = 0; i < phrases.length; i++) {
-      const item = [];
-      item.push(phrases[i].toLowerCase().split(/\W+/).filter(word => word.length > 0));
-
-      tokenized.push(item);
+      const matches = phrases[i].toLowerCase().match(/[a-záàâãéèêíïóôõöúçñ\w]+/g);
+      if (matches) {
+        phrasesTokenized.push(matches.filter(word => word.length > 0));
+      }
     }
 
-    return tokenizedPhrases;
+    return phrasesTokenized;
   }
 
   removeStopWords(tokenizedPhrases) {
@@ -42,36 +44,49 @@ class BLLTextRefactor {
 
     for (let i = 0; i < tokenizedPhrases.length; i++) {
       const phrase = tokenizedPhrases[i];
-      const filteredWords = phrase.filter(word => !stopwords.includes(word));
-
-      withoutStopwords.push(filteredWords);
+      const cleanedPhrase = [];
+  
+      for (let j = 0; j < phrase.length; j++) {
+        const word = phrase[j];
+  
+        if (!stopwords.includes(word)) {
+          cleanedPhrase.push(word);
+        }
+      }
+  
+      withoutStopwords.push(cleanedPhrase);
     }
 
     return withoutStopwords;
   }
 
-  lemmatizeTokens(tokenMatrix) {
-    const lemmatizedMatrix = [];
-
-    for (let i = 0; i < tokenMatrix.length; i++) {
-      const tokenList = tokenMatrix[i];
-      const text = tokenList.join(' ');
-      const doc = nlp(text);
-
-      doc.normalize();
-      const lemmatizedTokens = doc.out('array');
-
-      lemmatizedMatrix.push(lemmatizedTokens);
+  lemmatizeTokens(withoutStopwords) {
+    const lemmatizedPhrases = [];
+  
+    for (let i = 0; i < withoutStopwords.length; i++) {
+      const phrase = withoutStopwords[i];
+      const lemmatizedPhrase = [];
+  
+      for (let j = 0; j < phrase.length; j++) {
+        const word = phrase[j];
+  
+        const doc = nlp(word).normalize(false);
+        const lemmatizedWord = doc.out();
+  
+        lemmatizedPhrase.push(lemmatizedWord);
+      }
+  
+      lemmatizedPhrases.push(lemmatizedPhrase);
     }
-
-    return lemmatizedMatrix;
+  
+    return lemmatizedPhrases;
   }
 
-  extractKeywordsFromMatrix(lemmatizedMatrix) {
+  extractKeywordsOften(lemmatized) {
     const wordCount = {};
 
-    for (let i = 0; i < lemmatizedMatrix.length; i++) {
-      const tokenList = lemmatizedMatrix[i];
+    for (let i = 0; i < lemmatized.length; i++) {
+      const tokenList = lemmatized[i];
       const listObject = {};
 
       tokenList.forEach(token => {
@@ -88,10 +103,30 @@ class BLLTextRefactor {
     return wordCount;
   }
 
-  oftenWords(wordCount) {
-    const sortedKeywords = Object.keys(wordCount).sort((a, b) => wordCount[b] - wordCount[a]);
-
-    return sortedKeywords;
+  sortWords(wordCount) {
+    const sortedWordFrequency = {};
+    
+    for (const listKey in wordCount) {
+      if (wordCount.hasOwnProperty(listKey)) {
+        const list = wordCount[listKey];
+        const sortedList = {};
+  
+        // Converter o objeto em uma matriz de pares (palavra, contagem)
+        const wordArray = Object.entries(list);
+  
+        // Ordenar a matriz com base na contagem (valor) em ordem decrescente
+        wordArray.sort((a, b) => b[1] - a[1]);
+  
+        // Converter a matriz classificada de volta para um objeto
+        wordArray.forEach(([word, count]) => {
+          sortedList[word] = count;
+        });
+  
+        sortedWordFrequency[listKey] = sortedList;
+      }
+    }
+  
+    return sortedWordFrequency;
   }
 }
 

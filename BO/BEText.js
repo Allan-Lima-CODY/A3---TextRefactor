@@ -4,11 +4,12 @@ class Text {
       this.title = null;
       this.predefinedKeywords  = null;
       this.phrases = null;
-      this.textTokenized = null;
+      this.tokenizedPhrases = null;
+      this.removedStopwords = null;
+      this.lemmatized = null;
       this.extractedSortOftenWords = null;
-      this.textTheme = null;
-      this.tokenizedWithoutStopWords = null;
-      this.stemmed = null;
+      this.textRefactored = null;
+      this.wordFrequency = null;
     }
   }
   
