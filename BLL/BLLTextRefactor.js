@@ -1,6 +1,6 @@
-import stopword from 'stopword';
-const language = 'pt';
+import natural from 'natural';
 import nlp from 'compromise';
+import compromise from 'compromise';
 import stopwords from '../Constants/stopwords.js'
 
 class BLLTextRefactor {
@@ -45,43 +45,44 @@ class BLLTextRefactor {
     for (let i = 0; i < tokenizedPhrases.length; i++) {
       const phrase = tokenizedPhrases[i];
       const cleanedPhrase = [];
-  
+
       for (let j = 0; j < phrase.length; j++) {
         const word = phrase[j];
-  
+
         if (!stopwords.includes(word)) {
           cleanedPhrase.push(word);
         }
       }
-  
+
       withoutStopwords.push(cleanedPhrase);
     }
 
     return withoutStopwords;
   }
-
+  
   lemmatizeTokens(withoutStopwords) {
     const lemmatizedPhrases = [];
   
     for (let i = 0; i < withoutStopwords.length; i++) {
       const phrase = withoutStopwords[i];
       const lemmatizedPhrase = [];
-  
+      
       for (let j = 0; j < phrase.length; j++) {
         const word = phrase[j];
   
-        const doc = nlp(word).normalize(false);
-        const lemmatizedWord = doc.out();
+        // Lematiza a palavra usando o "compromise"
+        const doc = nlp(word);
+        const lemmatizedWord = doc.normalize().out();
   
         lemmatizedPhrase.push(lemmatizedWord);
       }
-  
+
       lemmatizedPhrases.push(lemmatizedPhrase);
     }
-  
+
     return lemmatizedPhrases;
   }
-
+  
   extractKeywordsOften(lemmatized) {
     const wordCount = {};
 
@@ -105,27 +106,27 @@ class BLLTextRefactor {
 
   sortWords(wordCount) {
     const sortedWordFrequency = {};
-    
+
     for (const listKey in wordCount) {
       if (wordCount.hasOwnProperty(listKey)) {
         const list = wordCount[listKey];
         const sortedList = {};
-  
+
         // Converter o objeto em uma matriz de pares (palavra, contagem)
         const wordArray = Object.entries(list);
-  
+
         // Ordenar a matriz com base na contagem (valor) em ordem decrescente
         wordArray.sort((a, b) => b[1] - a[1]);
-  
+
         // Converter a matriz classificada de volta para um objeto
         wordArray.forEach(([word, count]) => {
           sortedList[word] = count;
         });
-  
+
         sortedWordFrequency[listKey] = sortedList;
       }
     }
-  
+
     return sortedWordFrequency;
   }
 }
