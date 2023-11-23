@@ -6,9 +6,7 @@ class Text {
       this.phrases = null;
       this.tokenizedPhrases = null;
       this.removedStopwords = null;
-      this.lemmatized = null;
       this.extractedSortOftenWords = null;
-      this.textRefactored = null;
       this.wordFrequency = null;
     }
   }

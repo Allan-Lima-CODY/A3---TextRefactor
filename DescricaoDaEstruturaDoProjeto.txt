@@ -1,0 +1,15 @@
+BLLs:
+    Foram criadas as BLLs para armazenar os métodos que irão ser chamados dentro das rotas. Todos os métodos referente a criação de grafo, tokenização, separação por frase, remoção de stopwords, estão dentro das BLLs.
+
+BOs:
+    Já as BOs, utilizei elas para organizar melhor o que cada elemento da aplicação irá ter. Os arquivos compactados por exemplo, tem o próprio arquivo, a leitura de todos os arquivos TXTs dentro de os textos.
+    Esses atributos são preenchidos em uma instãncia quando os métodos das BLLs são executados nas rotas e geram valores para essas características.
+
+Constants:
+    É um pasta que criei para armazenar valores que nunca irão mudar. Exemplo disso são as stopwords.
+
+routes:
+    São os arquivos de rota que serão chamados para que toda a manipulação possa acontecer. A rota é o que comanda as operações, chama os métodos de dentro das BLLs e preenche atributos das BOs.
+
+index.js:
+    É o arquivo que chama as rotas e usam elas dentro do sistema. É responsável por registrar as rotas e dar funcionamento a elas.
