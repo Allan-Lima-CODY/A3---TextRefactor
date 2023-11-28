@@ -15,7 +15,7 @@ const exportedCoAuthorship = {
 
 coauthorship.get("/getcoauthorship", async (req, res, error) => {
     objCoAuthorship.texts = bllCoAuthorShip.getTexts(exportedArchives.objArchive);
-    objCoAuthorship.coauthorship = bllCoAuthorShip.getCoAuthoship(objCoAuthorship.texts.texts);
+    objCoAuthorship.coauthorship = bllCoAuthorShip.getCoAuthorship(objCoAuthorship.texts.texts);
     objCoAuthorship.centrality = bllCoAuthorShip.addCountToAuthorString(objCoAuthorship.coauthorship);
 
     Object.assign(exportedCoAuthorship.objCoAuthorship, objCoAuthorship);
