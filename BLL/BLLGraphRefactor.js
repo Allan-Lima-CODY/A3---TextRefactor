@@ -1,41 +1,60 @@
 class BLLGraphRefactor {
   extractWordFrequency(objText) {
+    // Crie uma nova lista para armazenar os objetos modificados
     const newList = [];
 
+    // Itere sobre os objetos em objText
     objText.forEach((obj) => {
+      // Extraia a propriedade wordFrequency do objeto
       const { wordFrequency } = obj;
+
+      // Crie um novo objeto com a propriedade wordFrequency
       const newObject = { wordFrequency };
 
+      // Adicione o novo objeto à lista
       newList.push(newObject);
     });
 
+    // Retorne a lista modificada
     return newList;
   }
 
+
   removeNumbers(wordFrequency) {
+    // Crie uma nova lista para armazenar os objetos modificados
     const newList = [];
 
+    // Itere sobre os objetos em wordFrequency
     wordFrequency.forEach((originalObj) => {
-      const modifyedObj = { ...originalObj };
+      // Crie uma cópia do objeto original
+      const modifiedObj = { ...originalObj };
 
-      for (const listKey in modifyedObj.wordFrequency) {
-        if (modifyedObj.wordFrequency.hasOwnProperty(listKey)) {
-          const list = modifyedObj.wordFrequency[listKey];
-          const nanWord = Object.keys(list).filter((key) => isNaN(key));
+      // Itere sobre as chaves do objeto wordFrequency dentro do objeto modificado
+      for (const listKey in modifiedObj.wordFrequency) {
+        if (modifiedObj.wordFrequency.hasOwnProperty(listKey)) {
+          // Obtenha a lista associada à chave
+          const list = modifiedObj.wordFrequency[listKey];
 
+          // Encontre as chaves que não são números (NaN)
+          const nanWords = Object.keys(list).filter((key) => isNaN(key));
+
+          // Itere sobre as chaves da lista e remova aquelas que não são números
           Object.keys(list).forEach((key) => {
-            if (!nanWord.includes(key)) {
+            if (!nanWords.includes(key)) {
               delete list[key];
             }
           });
         }
       }
 
-      newList.push(modifyedObj);
+      // Adicione o objeto modificado à nova lista
+      newList.push(modifiedObj);
     });
 
+    // Retorne a lista modificada
     return newList;
   }
+
 
   removeLittleWords(data) {
     // Criar uma nova list para armazenar os objetos modificados
@@ -142,19 +161,29 @@ class BLLGraphRefactor {
     return newList;
   }
 
-  createGraph(modifyedWordFrequency) {
+  createGraph(modifiedWordFrequency) {
+    // Crie uma lista para armazenar objetos contendo informações sobre todas as palavras
     const allWordsList = [];
-  
-    modifyedWordFrequency.forEach((wordFrequency, index) => {
+
+    // Itere sobre os objetos em modifiedWordFrequency
+    modifiedWordFrequency.forEach((wordFrequency, index) => {
+      // Crie um novo objeto para armazenar as palavras
       const allWordsObject = {};
+
+      // Gere uma chave única para o objeto com base no índice
       const allWordsKey = `VertexAndEdgesOfText${index + 1}`;
-  
+
+      // Associe a chave ao conjunto de palavras do objeto wordFrequency
       allWordsObject[allWordsKey] = wordFrequency.wordFrequency.AllWords;
+
+      // Adicione o objeto à lista
       allWordsList.push(allWordsObject);
     });
-  
+
+    // Retorne a lista contendo as informações sobre todas as palavras
     return allWordsList;
   }
+
 }
 
 export default BLLGraphRefactor;
