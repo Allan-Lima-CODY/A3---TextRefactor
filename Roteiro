@@ -1,0 +1,9 @@
+1 - Primeiro, explicar a estrutura do projeto seguindo o arquivo DescricaoDaEstruturaDoProjeto. Falar sobre como a API se comporta e tudo sobre o funcionamento.
+2 - Mostrar os métodos e as chamadas dos mesmos referente a parte de resgate dos dados contidos dentro dos arquivos zip.
+3 - Explicar o porque tem duas rotas referentes aos arquivos zips e porque tem dois deles.
+4 - Fazer o mesmo para a tokenização do texto, para a criação do grafo referente aos textos, a similaridade entre textos e a rede de coautoria.
+
+Detalhes:
+ - Quando for falar sobre a similaridade, explicar bem qual foi a lógica usada para saber se um texto é parecido com outro. A lógica é a seguinte:
+    Em uma suposição, onde a palavra paisagem apareça 2 vezes no texto 1 e 4 vezes no texto 2, o número de aparições vão ser somados dessa palavra nos dois textos. E isso irá ser feito para todas as palavras que forem iguais entre os dois textos.
+    Obtendo os resultados das somas das aparições entre todas as palavras que forem iguais, esses números obtidos irão ser somados, dando um resultado final, trazendo a similaridade dos textos.

@@ -1,0 +1,41 @@
+Tempo de Execução:
+
+• Quanto tempo o algoritmo leva para processar os dados? Ele é linear, quadrático, logarítmico, etc.?
+O programa se trata de um algoritmo linear e o mesmo demora pouco mais de um segundo para ser executado em sua parte mais demora, onde é preenchido o objText com todas as propriedades de cada texto dentro do arquivo compactado. Isso inclui tokenização, remoção de stopwords, separação de frases, etc.
+
+• Como o tempo de execução aumenta com o aumento do tamanho dos conjuntos de dados?
+Considerando que a parte mais demorada do código, demora pouco mais de um segundo para ser executada e nessa mesma parte, são feitas várias operações relacionadas a linguagem natural, acredito que o tempo que demoraria para executar esse parte, não aumentaria tanto se existisse mais arquivos TXTs dentro das pastas compactadas.
+
+Espaço de Armazenamento:
+
+• Quanta memória o algoritmo consome? Ele utiliza estruturas de dados eficientes em termos de espaço?
+O algoritmo usa em sua maioria, estruturas de lista vetorizada e objetos no padrão json. Garanti que não fiquem salvos dados desnecessários para que não houvesse consumo de memória desnecessário. Então o algoritmo não ocupa tanto espaço em memória, nem com o próprio código e nem com seus resultados e gravações.
+
+• Como o uso de memória aumenta com o aumento do tamanho dos conjuntos de dados?
+Não aumenta muito considerando que o algoritmo foi feito para suportar isso.
+
+Eficiência do Algoritmo:
+
+• Como o desempenho do algoritmo se compara a outras abordagens possíveis?
+Vários tipos de abordagens poderiam ter sido tomadas. Como não usar orientação a objetos e simplificar a gravação dos dados em uma estrutura mais direta. Porém, com a orientação a objeto, pude por exemplo utilizar a mesma classe de métodos BLL relacionada à manipulação dos arquivos compactados. Os dados ficam mais organizados em uma estrutura divida e bem implementada.
+
+• Existem otimizações que podem ser feitas para melhorar a eficiência?
+Sim. Acredito que alguns atributos das classes acabam não sendo usado quando uma informação é gravado. É usado em outro procedimento apenas, mas o resultado da gravação nesses atributos não são exibidos.
+
+Escalabilidade:
+
+• Como o algoritmo se comporta ao lidar com conjuntos de dados muito grandes?
+Ele se comporta bem. Age rápido, não demora para exibir os dados solicitados e atende o que é pedido. O conjunto de dados usado como base, já é significativamente grande e ele trabalha bem.
+
+• Existem limitações práticas em termos de escala?
+Acredito que alguns métodos poderiam ser assíncronos para uma melhor fluidez. Alguns métodos modificam um conjunto grande de dados. Acredito que isso melhoraria a escalabilidade.
+
+Sensibilidade a Parâmetros:
+
+• O desempenho do algoritmo é sensível a mudanças nos parâmetros? Isso pode afetar a complexidade computacional?
+Sim. Caso seja mudado como os métodos trabalham dentro do programa, acredito sim que possa haver uma adição à complexidade computacional do sistema.
+
+Adaptação Dinâmica:
+
+• O algoritmo é capaz de lidar com mudanças dinâmicas nos dados? Como ele se adapta a adições ou remoções de dados?
+Se for colocado mais dados, ele irá apenas demorar um pouco mais para ser executado de acordo com o quanto foi adicionado. Se for retirado dados, o mesmo irá demorar menos para executar o que foi pedido. E se houver modificações nos dados, de forma que o programa não aceite essa mudança, o mesmo irá informa o que deve ser entregue para que ele possa agir.

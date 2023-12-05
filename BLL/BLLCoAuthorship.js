@@ -23,7 +23,6 @@ class BLLCoAuthorShip {
         // Retorne a lista de coautoria
         return authorList;
     }
-    
 
     countAuthors(authorList) {
         const authorCounts = {};

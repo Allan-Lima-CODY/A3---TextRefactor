@@ -19,7 +19,6 @@ class BLLGraphRefactor {
     return newList;
   }
 
-
   removeNumbers(wordFrequency) {
     // Crie uma nova lista para armazenar os objetos modificados
     const newList = [];
@@ -54,7 +53,6 @@ class BLLGraphRefactor {
     // Retorne a lista modificada
     return newList;
   }
-
 
   removeLittleWords(data) {
     // Criar uma nova list para armazenar os objetos modificados
