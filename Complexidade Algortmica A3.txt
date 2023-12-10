@@ -39,3 +39,6 @@ Adaptação Dinâmica:
 
 • O algoritmo é capaz de lidar com mudanças dinâmicas nos dados? Como ele se adapta a adições ou remoções de dados?
 Se for colocado mais dados, ele irá apenas demorar um pouco mais para ser executado de acordo com o quanto foi adicionado. Se for retirado dados, o mesmo irá demorar menos para executar o que foi pedido. E se houver modificações nos dados, de forma que o programa não aceite essa mudança, o mesmo irá informa o que deve ser entregue para que ele possa agir.
+
+• Análise Assintótica
+A análise assintótica, fiz para cada função na pasta de BLL dentro de cada aquivo. A análise foi feita para cada método separadamente.
