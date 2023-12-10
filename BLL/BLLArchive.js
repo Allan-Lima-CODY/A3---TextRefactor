@@ -3,7 +3,7 @@ import chardet from 'chardet';
 import iconv from 'iconv-lite';
 
 class BLLArchive {
-    getZip(zip) {
+    getZip(zip) { //O(n), onde n é o tamanho do arquivo zip
         //Pega o arquivo zip no destino que a variável na rota armazena e cria uma instância de arquivo zip.
         const archive = new admZip(zip);
 
@@ -11,7 +11,7 @@ class BLLArchive {
         return archive;
     }
 
-    getFilesInZip(archive) {
+    getFilesInZip(archive) { //O(m), onde m é o número de entradas (arquivos) no arquivo ZIP
         //Cria uma lista com todos os arquivos TXTs que tem dentro do arquivo zipado.
         const listFiles = archive.getEntries();
 
@@ -19,7 +19,7 @@ class BLLArchive {
         return listFiles;
     }
 
-    getListOfTexts(listFiles, archive) {
+    getListOfTexts(listFiles, archive) { //O(m), onde m é o número de arquivos na lista
         const textList = [];
     
         //Passa por todos os arquivos da lista

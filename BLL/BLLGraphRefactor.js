@@ -1,5 +1,5 @@
 class BLLGraphRefactor {
-  extractWordFrequency(objText) {
+  extractWordFrequency(objText) { //O(m), onde m é o número de objetos em objText
     // Crie uma nova lista para armazenar os objetos modificados
     const newList = [];
 
@@ -19,7 +19,7 @@ class BLLGraphRefactor {
     return newList;
   }
 
-  removeNumbers(wordFrequency) {
+  removeNumbers(wordFrequency) { //O(m⋅n⋅(k+k′)), onde m é o número de objetos em wordFrequency, n é o número médio de chaves no objeto wordFrequency, k é o número médio de chaves em cada lista associada a uma chave, e k′ é o número de chaves na lista de chaves que não são números (NaN).
     // Crie uma nova lista para armazenar os objetos modificados
     const newList = [];
 
@@ -54,7 +54,7 @@ class BLLGraphRefactor {
     return newList;
   }
 
-  removeLittleWords(data) {
+  removeLittleWords(data) { //O(m⋅n⋅k), onde m é o número de objetos em data, n é o número médio de chaves no objeto wordFrequency, e k é o número médio de chaves em cada lista associada a uma chave.
     // Criar uma nova list para armazenar os objetos modificados
     const newList = [];
 
@@ -88,7 +88,7 @@ class BLLGraphRefactor {
     return newList;
   }
 
-  onlyAllWords(data) {
+  onlyAllWords(data) { //O(m⋅n⋅k+m⋅plogp), onde m é o número de objetos em data, n é o número médio de chaves no objeto wordFrequency, k é o número médio de palavras em cada lista associada a uma chave, e p é o número total de palavras distintas em "AllWords"
     // Criar uma nova list para armazenar os objetos modificados
     const newList = [];
 
@@ -135,7 +135,7 @@ class BLLGraphRefactor {
     return newList;
   }
 
-  removeEmptyLists(data) {
+  removeEmptyLists(data) { //O(m⋅n), onde m é o número de objetos em data e n é o número médio de chaves no objeto wordFrequency para cada objeto.
     // Criar uma nova list para armazenar os objetos modificados
     const newList = [];
 
@@ -159,7 +159,7 @@ class BLLGraphRefactor {
     return newList;
   }
 
-  createGraph(modifiedWordFrequency) {
+  createGraph(modifiedWordFrequency) { //O(m⋅n), onde m é o número de objetos em modifiedWordFrequency e n é o número médio de palavras em wordFrequency.wordFrequency.AllWords para cada objeto.
     // Crie uma lista para armazenar objetos contendo informações sobre todas as palavras
     const allWordsList = [];
 
@@ -181,7 +181,6 @@ class BLLGraphRefactor {
     // Retorne a lista contendo as informações sobre todas as palavras
     return allWordsList;
   }
-
 }
 
 export default BLLGraphRefactor;

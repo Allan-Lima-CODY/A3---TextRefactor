@@ -2,30 +2,30 @@ import stopwords from '../Constants/stopwords.js'
 
 class BLLTextRefactor {
   // Retorna o texto original sem modificações
-  getText(text) {
+  getText(text) { //O(n), onde n é o tamanho do text
     return text;
   }
 
   // Obtém o título do texto a partir da primeira linha
-  getTitle(text) {
+  getTitle(text) { //O(n), onde n é o comprimento do texto de entrada
     const lines = text.split('\n');
     return lines[0];
   }
 
   // Obtém as palavras-chave predefinidas a partir da terceira linha
-  getPredefinedKeywords(text) {
+  getPredefinedKeywords(text) { //O(n), onde n é o comprimento do texto de entrada.
     const lines = text.split('\n');
     return lines[2];
   }
 
   // Obtém as frases do texto divididas com base em pontos e vírgulas
-  getPhrases(text) {
+  getPhrases(text) { //O(n), onde n é o comprimento do texto de entrada.
     const phrases = text.split(/[\.;]/);
     return phrases;
   }
 
   // Tokeniza as frases, convertendo para minúsculas e removendo caracteres não alfabéticos
-  tokenizePhrases(phrases) {
+  tokenizePhrases(phrases) { //O(m⋅n), onde m é o número de frases e n é o comprimento médio de uma frase.
     // Cria uma lista para armazenar as frases tokenizadas
     const phrasesTokenized = [];
 
@@ -45,7 +45,7 @@ class BLLTextRefactor {
   }
 
   // Remove palavras de parada das frases tokenizadas
-  removeStopWords(tokenizedPhrases) {
+  removeStopWords(tokenizedPhrases) { //O(m⋅n⋅p⋅s), onde m é o número de frases, n é o número médio de palavras em uma frase, p é o número médio de palavras em uma frase que não são stopwords, e s é o número total de stopwords
     // Cria uma lista para armazenar as frases sem palavras de parada
     const withoutStopwords = [];
 
@@ -77,7 +77,7 @@ class BLLTextRefactor {
   }
 
   // Extrai palavras-chave frequentes das frases sem palavras de parada
-  extractKeywordsOften(withoutStopwords) {
+  extractKeywordsOften(withoutStopwords) { //O(m⋅n⋅p), onde m é o número de frases, n é o número médio de palavras em uma frase, e p é o número médio de palavras em uma lista
     // Cria um objeto para armazenar a contagem de palavras
     const wordCount = {};
 
@@ -108,7 +108,7 @@ class BLLTextRefactor {
   }
 
   // Extrai palavras-chave frequentes de todas as palavras em todos os textos
-  extractKeywordOftenAllTexts(allWords) {
+  extractKeywordOftenAllTexts(allWords) { //O(m⋅p+nlogn), onde m é o número total de palavras em todos os textos, p é o número médio de palavras em todos os textos, e n é o número total de entradas na matriz
     // Cria um objeto para armazenar a contagem de palavras
     const count = {};
 
@@ -142,7 +142,7 @@ class BLLTextRefactor {
   }
 
   // Ordena as palavras-chave frequentes em cada lista
-  sortWords(wordCount) {
+  sortWords(wordCount) { //O(n + m log m), onde n é o número de chaves em wordCount e m é o número total de palavras em todas as listas
     // Cria um objeto para armazenar as listas ordenadas
     const sortedWordFrequency = {};
 

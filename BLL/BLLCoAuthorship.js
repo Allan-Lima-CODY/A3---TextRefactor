@@ -1,10 +1,10 @@
 class BLLCoAuthorShip {
-    getTexts(archives) {
+    getTexts(archives) { //O(n), onde n é o tamanho do archives
         //Método para pegar os textos retornados pela BLLArchive.
         return archives;
     }
 
-    getCoAuthorship(archives) {
+    getCoAuthorship(archives) { //O(n⋅(m+k)) , onde n é o número de arquivos, m é o número médio de linhas por arquivo e k é o número médio de autores por linha
         // Mapeie os arquivos para obter a lista de coautoria
         const authorList = archives.map((item) => {
             // Divida as linhas do item com base na quebra de linha
@@ -24,7 +24,7 @@ class BLLCoAuthorShip {
         return authorList;
     }
 
-    countAuthors(authorList) {
+    countAuthors(authorList) { //O(m⋅(k+n)), onde m é o número de objetos em authorList, k é o número médio de autores por objeto e n é o número total de autores em todos os objetos.
         const authorCounts = {};
 
         //Para cada autor dentro das listas, é feita uma de cada um deles.
@@ -51,7 +51,7 @@ class BLLCoAuthorShip {
         return authorCounts;
     }
     
-    addCountToAuthorString(authorList) {
+    addCountToAuthorString(authorList) { //O(m⋅(k+n)+m⋅k′), onde m é o número de objetos em authorList, k é o número médio de autores por objeto, n é o número total de autores em todos os objetos, e k′ é o número médio de nomes de autores por objeto.
         // Obtenha a contagem de autores usando a função countAuthors
         const counts = this.countAuthors(authorList);
     
@@ -88,7 +88,6 @@ class BLLCoAuthorShip {
         // Retorne a lista de autores atualizada
         return updatedAuthorsList;
     }
-    
 }
 
 export default BLLCoAuthorShip;

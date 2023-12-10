@@ -13,7 +13,7 @@ const exportedRefactorText = {
     textRefactor
 };
 
-textRefactor.get("/refactortext", async (req, res, error) => {
+textRefactor.get("/refactortext", async (req, res, error) => { //O(m⋅k), onde m é o número total de palavras em todos os textos e k é o número médio de palavras por frase
     if (Object.keys(exportedArchives.objArchive.texts).length !== 0) {
         for (let i = 0; i < exportedArchives.objArchive.texts.length; i++) {
             const objText = new Text();

@@ -1,5 +1,5 @@
 class BLLSimilarity {
-  calculateSum(allWords1, allWords2) {
+  calculateSum(allWords1, allWords2) { //O(n1 + n2 + n), onde n1 e 2n são o número de palavras únicas em allWords1 e allWords2, respectivamente, e n é o número total de palavras únicas
     // Crie um conjunto contendo todas as palavras únicas de ambas as listas
     const allWords = new Set([...Object.keys(allWords1), ...Object.keys(allWords2)]);
 
@@ -19,7 +19,7 @@ class BLLSimilarity {
     return sum;
   }
 
-  relationAllWords(allWordsList) {
+  relationAllWords(allWordsList) { //O(m 2⋅(n1 + n2 + n)), onde m é o número de conjuntos de palavras na lista, n1 e n2 são o número de palavras únicas em dois conjuntos de palavras, respectivamente, e n é o número total de palavras únicas
     // Crie uma lista para armazenar as relações entre todos os conjuntos de palavras
     const resultRelation = [];
 
@@ -48,7 +48,6 @@ class BLLSimilarity {
     // Retorne a lista de relações calculadas
     return resultRelation;
   }
-
 }
 
 export default BLLSimilarity;
